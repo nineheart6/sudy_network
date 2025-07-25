@@ -110,6 +110,33 @@ echo " all $V_ALL success $V_SUCCESS fail $V_FAIL success_rate $V_SUCCESS_RATE %
 * cut, sort, uniq, grep 명령어 활용  
 * head나 tail로 결과 제한
 
+```bash
+#i/bin/bash
+
+#스크립트
+top3=$(cat network.log | cut -d" " -f3 | sort -n | uniq -c | head -n 3)
+
+#frequency
+first_fre=$(echo $top3 | cut -d" " -f1)
+second_fre=$(echo $top3 | cut -d" " -f3 )
+third_fre=$(echo $top3 | cut -d" " -f5 )
+
+#IP
+first=$(echo $top3 | cut -d" " -f2)
+second=$(echo $top3 | cut -d" " -f4)
+third=$(echo $top3 | cut -d" " -f6)
+
+#first connection
+first_time=$(grep "$first" ./network.log | head -n 1 | cut -d" " -f2)
+second_time=$(grep "$second" ./network.log | head -n 1 | cut -d" " -f2)
+third_time=$(grep "$third" ./network.log | head -n 1 | cut -d" " -f2)
+
+#output
+echo "$first $first_fre $first_time"
+echo "$second $second_fre $second_time"
+echo "$third $third_fre $third_time"
+
+```
 ---
 
 ## **문제 3: 서버 상태 점검 스크립트**
@@ -247,7 +274,9 @@ echo "high $V_HIGH medium $V_MEDIUM low $V_LOW"
 * if문과 변수만 사용  
 * ip, hostname, ping, grep, wc 명령어 활용  
 * 각 정보를 변수에 저장 후 출력
+```bash
 
+```
 ---
 
 ## **실행 방법**
