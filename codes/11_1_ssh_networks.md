@@ -72,6 +72,18 @@ EOF
 * grep, wc, cut 명령어 활용  
 * 파일명은 스크립트 실행 시 첫 번째 인자로 받기
 
+
+```bash
+#!/bin/bash
+
+V_SUCCESS=$(cat network.log | grep " CONNECT success" | wc -l)
+V_ALL=$(cat network.log | wc -l)
+V_FAIL=$((V_ALL - V_SUCCESS))
+V_SUCCESS_RATE=$((V_SUCCESS * 100 / V_ALL))
+
+echo " all $V_ALL success $V_SUCCESS fail $V_FAIL success_rate $V_SUCCESS_RATE %"
+
+```
 ---
 
 ## **문제 2: IP 주소별 접속 빈도 상위 리스트**
@@ -186,6 +198,25 @@ EOF
 * 숫자 비교를 위한 조건문 사용
 
 ```bash
+
+#!/bin/bash
+
+V_HIGH=0
+V_MEDIUM=0
+V_LOW=0
+
+while read V_IP V_COUNT; do
+    if [ $V_COUNT -ge 10 ]; then
+            V_HIGH=$((V_HIGH + 1))
+            echo "$V_IP ($V_COUNT)"
+    elif [ $V_COUNT -ge 5 ]; then
+            V_MEDIUM=$((V_MEDIUM + 1))
+    else
+            V_LOW=$((V_LOW + 1))
+    fi
+done < connections.txt
+
+echo "high $V_HIGH medium $V_MEDIUM low $V_LOW"
 
 
 ```
