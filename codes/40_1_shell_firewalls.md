@@ -88,10 +88,15 @@ else
 fi
 
 
-[seungjae@192.168.0.43 ~/quests/shell_fierwalls]$ sudo ./problem2.sh 8000/tcp
-[INFO]8000/tcp is opened. delete.
+[seungjae@192.168.0.43 ~/quests/shell_fierwalls]$ sudo ./problem2.sh 8080/tcp
+[INFO]8080/tcp is opened. delete.
 success
 [seungjae@192.168.0.43 ~/quests/shell_fierwalls]$ sudo firewall-cmd --list-ports
+
+[mk@192.168.0.100 ~]$ telnet 192.168.0.43 8080
+Trying 192.168.0.43...
+telnet: connect to address 192.168.0.43: Connection refused
+
 ```
 
 ---
